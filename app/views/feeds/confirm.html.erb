@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h3>以下の内容で、送信する。</h3>
+
+<%= form_with(model: @feed, local: true, url: feeds_path) do |form| %>
+<%= form.hidden_field :image, id: :feed_image %>
+<p>
+  <strong>Image:</strong>
+  <%= image_tag(@feed.image.url) %>
+  <%= hidden_field_tag :"cache[image]",@feed.image.cache_name %>
+</p>
+<%= form.submit "登録する" %>
+<% end %>
+
+<%= form_with(model: @feed, url: new_feed_path, local: true, method: 'get') do |form| %>
+  <%= form.hidden_field :image, id: :feed_image %>
+  <%= hidden_field_tag :"cache[image]",@feed.image.cache_name %>
+<%= form.submit "もどる", name: 'back' %>
+<% end %>
+
+
+<!-- "feed"=>{"image"=>"/uploads/tmp/1521787945-26379-0001-0380/course_01.jpg"},
+"cache"=>{"image"=>"1521787945-26379-0001-0380/course_01.jpg"},
+"commit"=>"登録する", "controller"=>"feeds", "action"=>"create"} -->

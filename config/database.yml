@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # 追記
+  template: template0
+
+development:
+  <<: *default
+  database: image_uploader_test_app_development
+
+
+test:
+  <<: *default
+  database: image_uploader_test_app_test
+
+production:
+  <<: *default
+  database: image_uploader_test_app_production
+  username: image_uploader_test_app
+  password: <%= ENV['IMAGE_UPLOADER_TEST_APP_DATABASE_PASSWORD'] %>
